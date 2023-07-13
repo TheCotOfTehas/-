@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatClint"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closed="Window_Closing">
     <Grid Height="434" VerticalAlignment="Bottom" Loaded="Window_Loaded">
         <Grid.ColumnDefinitions>
 
@@ -13,7 +13,7 @@
         <TextBox x:Name="tbUserName" HorizontalAlignment="Left" Margin="236,40,0,0" TextWrapping="Wrap" Text="Имя User" VerticalAlignment="Top" Width="505" Height="45" RenderTransformOrigin="0.715,0.49"/>
         <Button x:Name="bConnDicon" Content="Connect" HorizontalAlignment="Left" Margin="51,40,0,0" VerticalAlignment="Top" Height="45" Width="159" Click="Button_Click"/>
         <ListBox x:Name="lbChat" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="51,109,59,103" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="thMessage" HorizontalAlignment="Left" Margin="51,352,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="690" Height="69" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="thMessage" HorizontalAlignment="Left" Margin="51,352,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="690" Height="69" Grid.ColumnSpan="2" KeyDown="tbMessage_KeyDown"/>
 
     </Grid>
 </Window>

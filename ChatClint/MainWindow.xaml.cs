@@ -31,13 +31,14 @@ namespace ChatClint
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			client = new ServiceMyClient(new System.ServiceModel.InstanceContext(this));
+			//client = new ServiceMyClient(new System.ServiceModel.InstanceContext(this));
 		}
 
 		void ConnectUser()
 		{
 			if (!isConnected)
 			{
+				client = new ServiceMyClient(new System.ServiceModel.InstanceContext(this));
 				ID = client.Connect(tbUserName.Text);
 				tbUserName.IsEnabled = false;
 				bConnDicon.Content = "Disconnect";
@@ -50,6 +51,7 @@ namespace ChatClint
 			if (isConnected)
 			{
 				client.Disconnect(ID);
+				client = null;
 				tbUserName.IsEnabled = true;
 				bConnDicon.Content = "Connect";
 				isConnected = false;
@@ -71,6 +73,23 @@ namespace ChatClint
 		public void MsgCallback(string msg)
 		{
 			lbChat.Items.Add(msg);
+		}
+
+		private void Window_Closing(object sender, EventArgs e)
+		{
+			DisconnectUser();
+		}
+
+		private void tbMessage_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				if (client != null)
+				{
+					client.SendMsg(thMessage.Text, ID);
+					thMessage.Text = "";
+				}
+			}
 		}
 	}
 }
